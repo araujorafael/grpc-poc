@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+
+  product:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/product.Dockerfile
+    environment:
+      DISCOUNT_ADDR: "discount:3003"
+      DATABASE_URL: "postgresql://postgres:admin@db:5432/ecommerce?sslmode=disable"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - discount
+      
+  discount:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/discount.Dockerfile
+         
+  db:
+    build:
+      context: ./databases
+      dockerfile: ../Dockerfiles/db.Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "3000:80"
+    depends_on:
+      - db

@@ -1,0 +1,18 @@
+[package]
+name = "discount"
+version = "0.1.0"
+authors = ["Rafael Araujo <rafa.pc2112@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tonic = "0.1.0-alpha.5"
+bytes = "0.4"
+prost = "0.5"
+prost-derive = "0.5"
+tokio = "=0.2.0-alpha.6"
+chrono = "0.4"
+
+[build-dependencies]
+tonic-build = "0.1.0-alpha.5"
